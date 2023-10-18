@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="RestSharp" Version="110.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\SLH.Common\SLH.Common.csproj" />
+    </ItemGroup>
+    
+
+</Project>
