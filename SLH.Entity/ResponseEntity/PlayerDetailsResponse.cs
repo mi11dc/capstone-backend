@@ -13,5 +13,9 @@ namespace SLH.Entity.ResponseEntity
         public string SportName { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
+        public string DOB { get; set; }
+        public string Country { get; set; }
+        public string UserBio { get; set; }
+        public List<PlayerJoinedHistory> JoinedHistory { get; set; }
     }
 }

@@ -22,11 +22,12 @@ namespace SLH.Service.Service
             parameters.Add("@userId", entity.UserId, DbType.Int64, ParameterDirection.Input);
             parameters.Add("@id", entity.Id, DbType.Int64, ParameterDirection.Input);
             parameters.Add("@searchStr", entity.SearchStr, DbType.String, ParameterDirection.Input);
-            //BaseHelper.AddPageParams(new BaseSearchEntity()
-            //{
-            //    PageNo = entity.PageNo,
-            //    PageSize = entity.PageSize
-            //}, ref parameters);
+            parameters.Add("@isDropdown", entity.IsDropdown, DbType.Boolean, ParameterDirection.Input);
+            BaseHelper.AddPageParams(new BaseSearchEntity()
+            {
+                PageNo = entity.PageNo,
+                PageSize = entity.PageSize
+            }, ref parameters);
             Helper.GetListData(ref result, ref parameters, SqlConstant.GetAllSports);
             return result;
         }

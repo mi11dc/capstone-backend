@@ -60,15 +60,26 @@ namespace SLH.Controllers
 
         [HttpPost]
         [Route("GetRoleForRegister")]
-        public IActionResult GetRoleForRegister(RoleForRegisterEntity entity)
+        public IActionResult GetRoleForRegister()
         {
-            ICollection<string> errors = this.ValidatePost(entity);
+            RoleForRegisterEntity entity = new RoleForRegisterEntity()
+            {
+                Type = 1,
+            };
 
-            if (errors.Any())
-                return this.GetErrorResult(System.Net.HttpStatusCode.BadRequest, errors);
-
-            entity.Type = 1;
             ApiResult<List<GetRoleResponse>> result = _userService.GetRolesForRegister(entity);
+            return this.GetResult(result);
+        }
+
+        [HttpPost]
+        [Route("GetSportsForRegister")]
+        public IActionResult GetSportsForRegister()
+        {
+            GetSportsForRegisterEntity entity = new GetSportsForRegisterEntity()
+            {
+                IsDropdown = true,
+            };
+            ApiResult<List<GetSportResponse>> result = _userService.GetSportForRegister(entity);
             return this.GetResult(result);
         }
 

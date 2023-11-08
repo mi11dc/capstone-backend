@@ -8,6 +8,7 @@ namespace SLH.Entity.ResponseEntity
 {
     public class GetSportResponse
     {
+        public long TotalCount { get; set; }
         public long Id { get; set; }
         public string Name { get; set; }
     }

@@ -15,5 +15,7 @@ namespace SLH.Service.Interface
         ApiResult<GetTournamentResponse> TournamentAdd(AddTournamentEntity entity);
         ApiResult<GetTournamentResponse> TournamentUpdate(UpdateTournamentEntity entity);
         ApiResult<GetTournamentResponse> TournamentDelete(DeleteTournamentEntity entity);
+        ApiResult<GetTournamentResponse> AddTournamentTeam(AddTeamToTournamentEntity entity);
+        ApiResult<GetTournamentResponse> ReleaseTournamentTeam(ReleaseTeamFromTournamentEntity entity);
     }
 }

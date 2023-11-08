@@ -14,7 +14,10 @@ namespace SLH.Service.Common
         public const string UserStatusChange = "UserStatusChange";
         public const string UserDetailsById = "UserDetailsById";
         public const string GetRolesForRegister = "GetRolesForRegister";
+        public const string GetSportsForRegister = "GetSportsForRegister";
         public const string RoleWiseUsers = "RoleWiseUsers";
+        public const string GetPlayersForTeam = "GetPlayersForTeam";
+        public const string GetTeamPlayer = "GetTeamPlayer";
 
         //public const string ChangePassword = "ChangePassword";
         //public const string ForgotPassword = "CheckUserAvailableWithEmail";
@@ -41,6 +44,8 @@ namespace SLH.Service.Common
         public const string TeamAdd = "TeamAdd";
         public const string TeamUpdate = "TeamUpdate";
         public const string TeamDelete = "TeamDelete";
+        public const string TeamPlayerAdd = "TeamPlayerAdd";
+        public const string TeamPlayerRelease = "TeamPlayerRelease";
         #endregion
 
         #region Tournaments
@@ -48,6 +53,8 @@ namespace SLH.Service.Common
         public const string TournamentAdd = "TournamentAdd";
         public const string TournamentUpdate = "TournamentUpdate";
         public const string TournamentDelete = "TournamentDelete";
+        public const string TournamentTeamAdd = "TournamentTeamAdd";
+        public const string TournamentTeamRelease = "TournamentTeamRelease";
         #endregion
 
         #region Matches

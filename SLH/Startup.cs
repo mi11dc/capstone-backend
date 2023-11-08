@@ -57,7 +57,7 @@ namespace SLH
             services.AddSwaggerGen(c =>
             {
                 //// The generated Swagger JSON file will have these properties.
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "House Base Network Service Swagger Docs", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Sports League Hub Swagger Docs", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,

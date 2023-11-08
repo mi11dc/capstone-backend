@@ -45,7 +45,7 @@ namespace SLH.Controllers
         }
 
         [HttpPost]
-        [Route("UpdateProfile")]
+        [Route("GetUsersRoleWise")]
         public IActionResult GetUsersRoleWise(GetUsersRoleWiseEntity entity)
         {
             ICollection<string> errors = this.ValidatePost(entity);
@@ -54,6 +54,20 @@ namespace SLH.Controllers
                 return this.GetErrorResult(System.Net.HttpStatusCode.BadRequest, errors);
 
             ApiResult<List<UserDetailsResponse>> result = _userService.RoleWiseUsers(entity);
+            return this.GetResult(result);
+        }
+
+        [HttpPost]
+        [Route("GetPlayersForTeam")]
+        public IActionResult GetPlayersForTeam(GetPlayersEntity entity)
+        {
+            ICollection<string> errors = this.ValidatePost(entity);
+
+            if (errors.Any())
+                return this.GetErrorResult(System.Net.HttpStatusCode.BadRequest, errors);
+
+            entity.UserId = this.GetUserID();
+            ApiResult<List<PlayerDetailsResponse>> result = _userService.GetPlayersForTeam(entity);
             return this.GetResult(result);
         }
 

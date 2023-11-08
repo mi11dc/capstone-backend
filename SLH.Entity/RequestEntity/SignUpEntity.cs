@@ -11,5 +11,6 @@ namespace SLH.Entity.RequestEntity
         public string Password { get; set; }
         public string UserName { get; set; }
         public long UserRole { get; set; }
+        public long SportId { get; set; }
     }
 }

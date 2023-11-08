@@ -53,6 +53,7 @@ namespace SLH.Service.Service
             parameters.Add("@password", entity.Password, DbType.String, ParameterDirection.Input);
             parameters.Add("@username", entity.UserName, DbType.String, ParameterDirection.Input);
             parameters.Add("@roleId", entity.UserRole, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("@sportId", entity.SportId, DbType.Int64, ParameterDirection.Input);
 
             Helper.GetData(ref result, ref parameters, SqlConstant.SignUp);
 
@@ -134,7 +135,7 @@ namespace SLH.Service.Service
             parameters.Add("@country", userEntity.Country, DbType.String, ParameterDirection.Input);
             parameters.Add("@dOB", userEntity.DOB, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@userBio", userEntity.UserBio, DbType.String, ParameterDirection.Input);
-  
+
             Helper.GetData(ref result, ref parameters, SqlConstant.UpdateProfile);
 
             return result;
@@ -151,6 +152,17 @@ namespace SLH.Service.Service
             return result;
         }
 
+        public ApiResult<List<GetSportResponse>> GetSportForRegister(GetSportsForRegisterEntity entity)
+        {
+            ApiResult<List<GetSportResponse>> result = new ApiResult<List<GetSportResponse>>();
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@isDropdown", entity.IsDropdown, DbType.Int32, ParameterDirection.Input);
+
+            Helper.GetListData(ref result, ref parameters, SqlConstant.GetSportsForRegister);
+
+            return result;
+        }
+
         public ApiResult<List<UserDetailsResponse>> RoleWiseUsers(GetUsersRoleWiseEntity entity)
         {
             ApiResult<List<UserDetailsResponse>> result = new ApiResult<List<UserDetailsResponse>>();
@@ -158,6 +170,43 @@ namespace SLH.Service.Service
             parameters.Add("@roleId", entity.RoleId, DbType.Int32, ParameterDirection.Input);
 
             Helper.GetListData(ref result, ref parameters, SqlConstant.RoleWiseUsers);
+
+            return result;
+        }
+
+        public ApiResult<List<PlayerDetailsResponse>> GetPlayersForTeam(GetPlayersEntity entity)
+        {
+            ApiResult<List<PlayerDetailsResponse>> result = new ApiResult<List<PlayerDetailsResponse>>();
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@sportId", entity.SportId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@userId", entity.UserId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@teamId", entity.TeamId, DbType.Int32, ParameterDirection.Input);
+
+            Helper.GetListData(ref result, ref parameters, SqlConstant.GetPlayersForTeam);
+
+            if (entity.TeamId.ToString().Equals("0"))
+                GetPlayerTeamHistory(ref result, entity.UserId);
+
+            return result;
+        }
+
+        private void GetPlayerTeamHistory(ref ApiResult<List<PlayerDetailsResponse>> result, long userId)
+        {
+            result.Item.ForEach(delegate (PlayerDetailsResponse player)
+            {
+                player.JoinedHistory = new List<PlayerJoinedHistory>();
+                player.JoinedHistory = GetTeamPlayer(player.Id, userId).Item;
+            });
+        }
+
+        protected ApiResult<List<PlayerJoinedHistory>> GetTeamPlayer(long playerId, long userId)
+        {
+            ApiResult<List<PlayerJoinedHistory>> result = new ApiResult<List<PlayerJoinedHistory>>();
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@playerId", playerId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@userId", userId, DbType.Int32, ParameterDirection.Input);
+
+            Helper.GetListData(ref result, ref parameters, SqlConstant.GetTeamPlayer);
 
             return result;
         }

@@ -86,5 +86,33 @@ namespace SLH.Controllers
             ApiResult<GetTournamentResponse> result = _tournamentService.TournamentDelete(entity);
             return this.GetResult(result);
         }
+
+        [HttpPost]
+        [Route("AddTeamToTournament")]
+        public async Task<IActionResult> AddTeamToTournament(AddTeamToTournamentEntity entity)
+        {
+            ICollection<string> errors = this.ValidatePost(entity);
+
+            if (errors.Any())
+                return this.GetErrorResult(System.Net.HttpStatusCode.BadRequest, errors);
+
+            entity.OrganizerId = this.GetUserID();
+            ApiResult<GetTournamentResponse> result = _tournamentService.AddTournamentTeam(entity);
+            return this.GetResult(result);
+        }
+
+        [HttpPost]
+        [Route("ReleaseTeamFromTournament")]
+        public async Task<IActionResult> ReleaseTeamFromTournament(ReleaseTeamFromTournamentEntity entity)
+        {
+            ICollection<string> errors = this.ValidatePost(entity);
+
+            if (errors.Any())
+                return this.GetErrorResult(System.Net.HttpStatusCode.BadRequest, errors);
+
+            entity.OrganizerId = this.GetUserID();
+            ApiResult<GetTournamentResponse> result = _tournamentService.ReleaseTournamentTeam(entity);
+            return this.GetResult(result);
+        }
     }
 }

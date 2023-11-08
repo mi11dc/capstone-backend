@@ -15,5 +15,7 @@ namespace SLH.Service.Interface
         ApiResult<GetTeamResponse> TeamAdd(AddTeamEntity entity);
         ApiResult<GetTeamResponse> TeamUpdate(UpdateTeamEntity entity);
         ApiResult<GetTeamResponse> TeamDelete(DeleteTeamEntity entity);
+        ApiResult<GetTeamResponse> AddTeamPlayer(AddPlayerToTeamEntity entity);
+        ApiResult<GetTeamResponse> ReleaseTeamPlayer(ReleasePlayerFromTeamEntity entity);
     }
 }

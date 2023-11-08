@@ -86,5 +86,33 @@ namespace SLH.Controllers
             ApiResult<GetTeamResponse> result = _teamService.TeamDelete(entity);
             return this.GetResult(result);
         }
+
+        [HttpPost]
+        [Route("AddPlayerToTeam")]
+        public async Task<IActionResult> AddPlayerToTeam(AddPlayerToTeamEntity entity)
+        {
+            ICollection<string> errors = this.ValidatePost(entity);
+
+            if (errors.Any())
+                return this.GetErrorResult(System.Net.HttpStatusCode.BadRequest, errors);
+
+            entity.OwnerId = this.GetUserID();
+            ApiResult<GetTeamResponse> result = _teamService.AddTeamPlayer(entity);
+            return this.GetResult(result);
+        }
+
+        [HttpPost]
+        [Route("ReleasePlayerFromTeam")]
+        public async Task<IActionResult> ReleasePlayerFromTeam(ReleasePlayerFromTeamEntity entity)
+        {
+            ICollection<string> errors = this.ValidatePost(entity);
+
+            if (errors.Any())
+                return this.GetErrorResult(System.Net.HttpStatusCode.BadRequest, errors);
+
+            entity.OwnerId = this.GetUserID();
+            ApiResult<GetTeamResponse> result = _teamService.ReleaseTeamPlayer(entity);
+            return this.GetResult(result);
+        }
     }
 }

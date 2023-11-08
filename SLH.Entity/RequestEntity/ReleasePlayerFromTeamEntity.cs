@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace SLH.Entity.RequestEntity
 {
-    public class AddVenueEntity
+    public class ReleasePlayerFromTeamEntity
     {
         public long Id { get; set; }
-        public string Name { get; set; }
-        public long UserId { get; set; }
-        public string Location { get; set; }
-        public string Country { get; set; }
+        public long OwnerId { get; set; }
     }
 }

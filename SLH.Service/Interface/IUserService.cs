@@ -16,6 +16,8 @@ namespace SLH.Service.Interface
         ApiResult<AuthenticationToken> GenerateToken(SignInEntity loginEntity);
         ApiResult<UserDetailsResponse> UpdateUser(UpdateProfileEntity userEntity);
         ApiResult<List<GetRoleResponse>> GetRolesForRegister(RoleForRegisterEntity entity);
+        ApiResult<List<GetSportResponse>> GetSportForRegister(GetSportsForRegisterEntity entity);
         ApiResult<List<UserDetailsResponse>> RoleWiseUsers(GetUsersRoleWiseEntity entity);
+        ApiResult<List<PlayerDetailsResponse>> GetPlayersForTeam(GetPlayersEntity entity);
     }
 }
